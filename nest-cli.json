@@ -1,0 +1,7 @@
+{
+  "sourceRoot": "src",
+  "entryFile": "app",
+  "compilerOptions": {
+    "tsConfigPath": "tsconfig.build.json"
+  }
+}

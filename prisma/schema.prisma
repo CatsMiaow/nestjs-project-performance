@@ -1,0 +1,27 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Memo {
+  id         Int        @id @default(autoincrement())
+  title      String
+  content    String?
+  categories Category[]
+  updatedAt  DateTime   @default(now())
+  createdAt  DateTime   @default(now())
+}
+
+model Category {
+  id     Int    @id @default(autoincrement())
+  name   String
+  Memo   Memo?  @relation(fields: [memoId], references: [id])
+  memoId Int?
+}

@@ -1,0 +1,28 @@
+import { Injectable } from '@nestjs/common';
+import { Prisma, Memo } from '@prisma/client';
+
+import { PrismaService } from '../common';
+
+/**
+ * https://www.prisma.io/docs/concepts/components/prisma-client/crud
+ */
+@Injectable()
+export class SampleService {
+  constructor(private prisma: PrismaService) {}
+
+  public create(data: Prisma.MemoCreateInput): Promise<Memo> {
+    return this.prisma.memo.create({ data });
+  }
+
+  public read(id: number): Promise<Memo | null> {
+    return this.prisma.memo.findUnique({ where: { id } });
+  }
+
+  public update(id: number, data: Prisma.MemoUpdateInput): Promise<Memo> {
+    return this.prisma.memo.update({ data, where: { id } });
+  }
+
+  public remove(id: number): Promise<Memo> {
+    return this.prisma.memo.delete({ where: { id } });
+  }
+}
