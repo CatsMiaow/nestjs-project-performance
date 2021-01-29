@@ -55,9 +55,10 @@ npm start
 - [Exceptions Filter](src/common/exceptions.filter.ts)
 - [Logging Middleware](src/common/logger.middleware.ts)
 - [Logger for Production](src/common/logger.service.ts)
+- [JWT Authentication](src/auth)
 - [CRUD API Sample](src/sample)
 - [Unit Test](src/sample/sample.controller.spec.ts)
-- [E2E Test](test/e2e/sample.spec.ts)
+- [E2E Test](test/e2e)
 
 ### Links
 

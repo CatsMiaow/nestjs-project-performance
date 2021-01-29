@@ -3,6 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER } from '@nestjs/core';
 import { ServeStaticModule } from '@nestjs/serve-static';
 
+import { AuthModule } from './auth/auth.module';
 import { ExceptionsFilter, LoggerMiddleware } from './common';
 import { CommonModule } from './common/common.module';
 import { configuration } from './config';
@@ -22,6 +23,8 @@ import { SampleModule } from './sample/sample.module';
     }),
     // Global
     CommonModule,
+    // Authentication
+    AuthModule,
     // API Sample
     SampleModule,
   ],
