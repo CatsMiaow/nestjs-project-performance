@@ -15,7 +15,6 @@
     "noUnusedParameters": false,
     "removeComments": true,
     "sourceMap": true,
-    "inlineSources": true,
     "forceConsistentCasingInFileNames": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

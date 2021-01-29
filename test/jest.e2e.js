@@ -3,7 +3,5 @@ const config = require('../jest.config');
 
 module.exports = {
   ...config,
-  testMatch: [
-    '**/e2e/**/*.[jt]s?(x)',
-  ],
+  testMatch: ['**/e2e/**/*.[jt]s?(x)'],
 };

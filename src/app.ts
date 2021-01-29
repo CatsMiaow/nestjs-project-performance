@@ -38,4 +38,4 @@ async function bootstrap(): Promise<void> {
 }
 
 // eslint-disable-next-line no-console
-bootstrap().catch(console.error);
+bootstrap().then(() => console.log('Bootstrap', new Date().toLocaleString())).catch(console.error);

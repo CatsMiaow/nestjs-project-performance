@@ -10,19 +10,19 @@ import { PrismaService } from '../common';
 export class SampleService {
   constructor(private prisma: PrismaService) {}
 
-  public create(data: Prisma.MemoCreateInput): Promise<Memo> {
+  public async create(data: Prisma.MemoCreateInput): Promise<Memo> {
     return this.prisma.memo.create({ data });
   }
 
-  public read(id: number): Promise<Memo | null> {
+  public async read(id: number): Promise<Memo | null> {
     return this.prisma.memo.findUnique({ where: { id } });
   }
 
-  public update(id: number, data: Prisma.MemoUpdateInput): Promise<Memo> {
+  public async update(id: number, data: Prisma.MemoUpdateInput): Promise<Memo> {
     return this.prisma.memo.update({ data, where: { id } });
   }
 
-  public remove(id: number): Promise<Memo> {
+  public async remove(id: number): Promise<Memo> {
     return this.prisma.memo.delete({ where: { id } });
   }
 }
