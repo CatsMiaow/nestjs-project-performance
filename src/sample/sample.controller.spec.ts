@@ -1,10 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { CommonModule } from '../common/common.module';
 import { SampleController } from './sample.controller';
 import { SampleModule } from './sample.module';
+import { CommonModule } from '../common/common.module';
 
-let app: TestingModule;
+let app: TestingModule | undefined;
 let sample: SampleController;
 let idx: number;
 

@@ -1,23 +1,26 @@
-export const util = {
-  isObject<T>(value: T): boolean {
+import type { Config, Default, Objectype, Production } from './config.interface';
+
+const util = {
+  isObject<T>(value: T): value is T & Objectype {
     return value !== null && typeof value === 'object' && !Array.isArray(value);
   },
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  merge(target: Record<string, any>, source: Record<string, any>): Record<string, unknown> {
-    Object.keys(source).forEach((key: string) => {
-      if (this.isObject(target[key]) && this.isObject(source[key])) {
-        Object.assign(source[key], this.merge(target[key], source[key]));
+  merge<T extends Objectype, U extends Objectype>(target: T, source: U): T & U {
+    for (const key of Object.keys(source)) {
+      const targetValue = target[key];
+      const sourceValue = source[key];
+      if (this.isObject(targetValue) && this.isObject(sourceValue)) {
+        Object.assign(sourceValue, this.merge(targetValue, sourceValue));
       }
-    });
+    }
 
     return { ...target, ...source };
   },
 };
 
-export const configuration = async (): Promise<Record<string, unknown>> => {
-  const { config } = await import('./default');
-  const environment = await import(`./${process.env.NODE_ENV || 'development'}`);
+export const configuration = async (): Promise<Config> => {
+  const { config } = <{ config: Default }> await import(`${__dirname}/default`);
+  const { config: environment } = <{ config: Production }> await import(`${__dirname}/${process.env.NODE_ENV || 'development'}`);
 
   // object deep merge
-  return util.merge(config, environment.config);
+  return util.merge(config, environment);
 };

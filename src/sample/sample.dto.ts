@@ -11,5 +11,5 @@ export class SampleDto implements Prisma.MemoCreateInput {
 
   @IsOptional()
   @ArrayNotEmpty()
-  public categories?: Prisma.CategoryCreateManyWithoutMemoInput;
+  public categories?: Prisma.CategoryCreateNestedManyWithoutMemoInput;
 }

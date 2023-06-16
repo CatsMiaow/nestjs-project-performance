@@ -1,16 +1,15 @@
 import { Controller, Body, Get, Param, Post, Put, Delete,
-  NotFoundException, InternalServerErrorException, ParseIntPipe } from '@nestjs/common';
-import { Memo } from '@prisma/client';
+  NotFoundException, InternalServerErrorException, ParseIntPipe, Logger } from '@nestjs/common';
+import type { Memo } from '@prisma/client';
 
-import { Logger } from '../common';
 import { SampleDto } from './sample.dto';
 import { SampleService } from './sample.service';
 
 @Controller('sample')
 export class SampleController {
-  constructor(private sample: SampleService, private logger: Logger) {
-    this.logger.setContext(SampleController.name);
-  }
+  private readonly logger: Logger = new Logger(SampleController.name);
+
+  constructor(private sample: SampleService) {}
 
   @Get('memo/:id')
   public async read(@Param('id', ParseIntPipe) id: number): Promise<Memo> {

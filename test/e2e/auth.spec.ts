@@ -1,10 +1,10 @@
-import { INestApplication } from '@nestjs/common';
+import type { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import supertest, { SuperTest, Test as AgentTest } from 'supertest';
 
 import { AppModule } from '../../src/app.module';
 
-let app: INestApplication;
+let app: INestApplication | undefined;
 let request: SuperTest<AgentTest>;
 let token: string;
 

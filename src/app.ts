@@ -1,25 +1,25 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { NestExpressApplication } from '@nestjs/platform-express';
+import type { NestExpressApplication } from '@nestjs/platform-express';
 import compression from 'compression';
 import session from 'express-session';
 import helmet from 'helmet';
 
 import { AppModule } from './app.module';
-import { Logger } from './common';
 
 async function bootstrap(): Promise<void> {
   const isProduction = (process.env.NODE_ENV === 'production');
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    logger: isProduction ? false : undefined,
+    bufferLogs: true,
   });
+
   app.useGlobalPipes(new ValidationPipe({
-    disableErrorMessages: true,
+    // disableErrorMessages: true,
     transform: true, // transform object to DTO class
+    whitelist: true,
   }));
 
   if (isProduction) {
-    app.useLogger(app.get(Logger));
     app.enable('trust proxy');
   }
 

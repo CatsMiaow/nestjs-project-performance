@@ -1,10 +1,10 @@
-import { INestApplication } from '@nestjs/common';
+import type { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
 
 import { AppModule } from '../../src/app.module';
 
-let app: INestApplication;
+let app: INestApplication | undefined;
 let httpServer: unknown;
 let idx: number;
 

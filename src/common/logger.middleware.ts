@@ -3,11 +3,10 @@ import type { Request, Response } from 'express';
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
+  private readonly logger: Logger = new Logger('Request');
   private readonly passUrl: string[] = ['/health'];
 
-  constructor(private logger: Logger) {}
-
-  public use(req: Request, res: Response, next: () => void): void {
+  public use(req: Request, _res: Response, next: () => void): void {
     if (this.passUrl.includes(req.originalUrl)) {
       return next();
     }

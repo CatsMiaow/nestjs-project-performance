@@ -14,9 +14,9 @@ Node.js Nest framework starter with Prisma
 # 1. node_modules
 npm ci
 # 2-1. Generate schema from existing database
-npx prisma introspect
+npx prisma db pull
 # Convert snake_case to PascalCase, camelCase in the generated schema
-npx prisma-schema-transformer ./prisma/schema.prisma
+npx @paljs/cli schema camel-case
 # 2-2. Write a model and generate it in the database
 npx prisma migrate dev --preview-feature
 # 3. Apply schema model to @prisma/client
@@ -54,7 +54,6 @@ npm start
 - See [app](src/app.ts), [app.module](src/app.module.ts)
 - [Exceptions Filter](src/common/exceptions.filter.ts)
 - [Logging Middleware](src/common/logger.middleware.ts)
-- [Logger for Production](src/common/logger.service.ts)
 - [JWT Authentication](src/auth)
 - [CRUD API Sample](src/sample)
 - [Unit Test](src/sample/sample.controller.spec.ts)
