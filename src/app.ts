@@ -5,6 +5,7 @@ import session from 'express-session';
 import helmet from 'helmet';
 
 import { AppModule } from './app.module';
+import { PrismaService } from './common';
 
 async function bootstrap(): Promise<void> {
   const isProduction = (process.env.NODE_ENV === 'production');
@@ -27,6 +28,11 @@ async function bootstrap(): Promise<void> {
   app.use(helmet());
   //#endregion
 
+  // https://docs.nestjs.com/recipes/prisma#issues-with-enableshutdownhooks
+  const prismaService = app.get(PrismaService);
+  prismaService.enableShutdownHooks(app);
+
+  app.enableShutdownHooks();
   await app.listen(process.env.PORT || 3000);
 }
 
