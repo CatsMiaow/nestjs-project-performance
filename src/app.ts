@@ -1,4 +1,3 @@
-import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import type { NestExpressApplication } from '@nestjs/platform-express';
 import compression from 'compression';
@@ -12,12 +11,6 @@ async function bootstrap(): Promise<void> {
   const app = await NestFactory.create<NestExpressApplication>(AppModule, {
     bufferLogs: true,
   });
-
-  app.useGlobalPipes(new ValidationPipe({
-    // disableErrorMessages: true,
-    transform: true, // transform object to DTO class
-    whitelist: true,
-  }));
 
   if (isProduction) {
     app.enable('trust proxy');

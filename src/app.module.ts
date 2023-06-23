@@ -1,6 +1,6 @@
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_FILTER } from '@nestjs/core';
+import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { ServeStaticModule } from '@nestjs/serve-static';
 
 import { AuthModule } from './auth/auth.module';
@@ -31,6 +31,12 @@ import { SampleModule } from './sample/sample.module';
   providers: [{
     provide: APP_FILTER,
     useClass: ExceptionsFilter,
+  }, {
+    provide: APP_PIPE,
+    useValue: new ValidationPipe({
+      transform: true,
+      whitelist: true,
+    }),
   }],
 })
 export class AppModule implements NestModule {
