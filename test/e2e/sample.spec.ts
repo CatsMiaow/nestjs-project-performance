@@ -1,6 +1,7 @@
 import type { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
+import { afterAll, beforeAll, expect, test } from 'vitest';
 
 import { AppModule } from '../../src/app.module';
 

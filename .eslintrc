@@ -6,17 +6,17 @@
     "project": "tsconfig.json",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "sonarjs", "jest"],
+  "plugins": ["@typescript-eslint", "sonarjs", "vitest"],
   "extends": [
     "eslint:recommended",
     "airbnb-base",
     "airbnb-typescript/base",
-    "plugin:jest/recommended",
+    "plugin:vitest/recommended",
     "plugin:sonarjs/recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking"
   ],
-  "ignorePatterns": ["**/node_modules/**", "dist/**"],
+  "ignorePatterns": ["**/node_modules/**", "dist/**", "**/vitest.*.ts"],
   "rules": { // These rules are for reference only.
     "class-methods-use-this": "off",
     // https://github.com/typescript-eslint/typescript-eslint/issues/1277
