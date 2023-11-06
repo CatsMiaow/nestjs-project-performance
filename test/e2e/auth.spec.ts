@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import supertest, { SuperTest, Test as AgentTest } from 'supertest';
@@ -21,8 +22,7 @@ beforeAll(async () => {
 });
 
 test('POST: /auth/login', async () => {
-  const { status, body } = await request.post('/auth/login')
-    .send({ username: 'foobar', password: 'crypto' });
+  const { status, body } = await request.post('/auth/login').send({ username: 'foobar', password: 'crypto' });
 
   expect([200, 201]).toContain(status);
   expect(body).toHaveProperty('access_token');
@@ -30,9 +30,7 @@ test('POST: /auth/login', async () => {
 });
 
 test('GET: /auth/check', async () => {
-  const { body } = await request.get('/auth/check')
-    .set('Authorization', `Bearer ${token}`)
-    .expect(200);
+  const { body } = await request.get('/auth/check').set('Authorization', `Bearer ${token}`).expect(200);
 
   expect(body).toHaveProperty('username', 'foobar');
 });

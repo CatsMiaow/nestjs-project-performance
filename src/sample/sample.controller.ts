@@ -1,5 +1,16 @@
-import { Controller, Body, Get, Param, Post, Put, Delete,
-  NotFoundException, InternalServerErrorException, ParseIntPipe, Logger } from '@nestjs/common';
+import {
+  Controller,
+  Body,
+  Get,
+  Param,
+  Post,
+  Put,
+  Delete,
+  NotFoundException,
+  InternalServerErrorException,
+  ParseIntPipe,
+  Logger,
+} from '@nestjs/common';
 import type { Memo } from '@prisma/client';
 
 import { SampleDto } from './sample.dto';

@@ -8,11 +8,11 @@ export class LoggerMiddleware implements NestMiddleware {
 
   public use(req: Request, _res: Response, next: () => void): void {
     if (this.passUrl.includes(req.originalUrl)) {
-      return next();
+      next();
+      return;
     }
 
     this.logger.log(`${req.method} ${req.originalUrl} - ${req.ip.replace('::ffff:', '')}`);
-
-    return next();
+    next();
   }
 }
