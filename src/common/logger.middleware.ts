@@ -1,12 +1,12 @@
 import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
-import type { Request, Response } from 'express';
+import type { FastifyRequest, FastifyReply } from 'fastify';
 
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
   private readonly logger: Logger = new Logger('Request');
   private readonly passUrl: string[] = ['/health'];
 
-  public use(req: Request, _res: Response, next: () => void): void {
+  public use(req: FastifyRequest, _res: FastifyReply, next: () => void): void {
     if (this.passUrl.includes(req.originalUrl)) {
       next();
       return;

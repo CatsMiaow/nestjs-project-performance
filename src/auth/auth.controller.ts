@@ -1,10 +1,9 @@
 import { Controller, Get, Post, UseGuards, Req } from '@nestjs/common';
-import type { Request } from 'express';
+import type { FastifyRequest } from 'fastify';
 
 import type { Payload } from './auth.interface';
 import { AuthService } from './auth.service';
 import { JwtAuthGuard, LocalAuthGuard } from './guards';
-import type { User } from '../user';
 
 @Controller()
 export class AuthController {
@@ -12,13 +11,13 @@ export class AuthController {
 
   @UseGuards(LocalAuthGuard)
   @Post('auth/login')
-  public login(@Req() req: Request): { access_token: string } {
-    return this.auth.login(<User>req.user);
+  public login(@Req() req: FastifyRequest): { access_token: string } {
+    return this.auth.login(req.user);
   }
 
   @UseGuards(JwtAuthGuard)
   @Get('auth/check')
-  public check(@Req() req: Request): Payload {
-    return <Payload>req.user;
+  public check(@Req() req: FastifyRequest): Payload {
+    return req.user;
   }
 }

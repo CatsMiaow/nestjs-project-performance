@@ -1,34 +1,19 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import type { NestExpressApplication } from '@nestjs/platform-express';
-import compression from 'compression';
-import session from 'express-session';
-import helmet from 'helmet';
+import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 
+import { middleware } from './app.middleware';
 import { AppModule } from './app.module';
 
 async function bootstrap(): Promise<string> {
   const isProduction = process.env.NODE_ENV === 'production';
-  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    bufferLogs: true,
+
+  const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter({ trustProxy: isProduction }), {
+    bufferLogs: isProduction,
   });
 
-  if (isProduction) {
-    app.enable('trust proxy');
-  }
-
-  //#region Express Middleware
-  app.use(compression());
-  app.use(
-    session({
-      secret: 'tEsTeD',
-      resave: false,
-      saveUninitialized: true,
-      cookie: { secure: 'auto' },
-    }),
-  );
-  app.use(helmet());
-  //#endregion
+  // Fastify Middleware
+  await middleware(app);
 
   app.enableShutdownHooks();
   await app.listen(process.env.PORT || 3000);

@@ -32,7 +32,7 @@ test('POST: /auth/login', async () => {
 test('GET: /auth/check', async () => {
   const { body } = await request.get('/auth/check').set('Authorization', `Bearer ${token}`).expect(200);
 
-  expect(body).toHaveProperty('username', 'foobar');
+  expect(body).toHaveProperty('name', 'foobar');
 });
 
 afterAll(async () => {

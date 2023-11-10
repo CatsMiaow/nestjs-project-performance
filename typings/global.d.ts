@@ -1,3 +1,5 @@
+import type { User } from '../src/user';
+
 export declare global {
   namespace NodeJS {
     interface ProcessEnv {
@@ -7,5 +9,11 @@ export declare global {
       DATABASE_URL: string;
       JWT_SECRET: string;
     }
+  }
+}
+
+declare module 'fastify' {
+  interface FastifyRequest {
+    user: User;
   }
 }
