@@ -9,7 +9,7 @@ export class ExceptionsFilter extends BaseExceptionFilter {
     const status = this.getHttpStatus(exception);
     if (status === HttpStatus.INTERNAL_SERVER_ERROR) {
       // Notifications
-      // const request = host.switchToHttp().getRequest<Request>();
+      // const request = host.switchToHttp().getRequest<FastifyRequest>();
       // request.method, request.originalUrl...
     }
   }
