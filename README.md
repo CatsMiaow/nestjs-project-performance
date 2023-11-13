@@ -1,6 +1,14 @@
-# nestjs-prisma-starter
+# nestjs-project-performance
 
-Node.js Nest framework starter with Prisma
+Node.js framework NestJS project for performance
+
+If you focus on the performance or features of the module, you can consider using another module as an alternative in NestJS. \
+In this example, the changed modules are as follows.
+
+- [Fastify](https://docs.nestjs.com/techniques/performance) instead of `Express`
+- [Prisma](https://docs.nestjs.com/recipes/prisma) instead of `TypeORM` with [nestjs-prisma](https://nestjs-prisma.dev)
+- [SWC](https://docs.nestjs.com/recipes/swc#swc) instead of `TypeScript compiler`
+- [Vitest](https://docs.nestjs.com/recipes/swc#vitest) instead of `Jest` with [vitest-mock-extended](https://www.npmjs.com/package/vitest-mock-extended)
 
 ## Configuration
 
@@ -34,8 +42,8 @@ Run [http://localhost:3000](http://localhost:3000)
 ## Test
 
 ```sh
-npm test # exclude e2e
-npm run test:e2e
+npm test
+npm run test:e2e # only e2e
 ```
 
 ## Production
@@ -62,7 +70,7 @@ npm start
 ### Links
 
 - [Nest Project Structure](https://github.com/CatsMiaow/node-nestjs-structure)
-- [Nest Sample](https://github.com/nestjs/nest/tree/master/sample)
-- [Awesome Nest](https://github.com/juliandavidmr/awesome-nestjs)
 - [NestJS](https://docs.nestjs.com)
+- [Fastify](https://fastify.dev)
 - [Prisma](https://www.prisma.io)
+- [Vitest](https://vitest.dev)
