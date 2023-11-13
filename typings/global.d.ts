@@ -1,15 +1,19 @@
-export declare global {
-  // https://github.com/microsoft/TypeScript/issues/7426
-  type Nullable<T> = T | null;
-  type Optional<T> = T | undefined;
-  type Voidable<T> = T | void;
+import type { User } from '../src/user';
 
+export declare global {
   namespace NodeJS {
     interface ProcessEnv {
       NODE_ENV: string;
       PORT: string;
 
+      DATABASE_URL: string;
       JWT_SECRET: string;
     }
+  }
+}
+
+declare module 'fastify' {
+  interface FastifyRequest {
+    user: User;
   }
 }

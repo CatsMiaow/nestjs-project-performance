@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import type { INestApplication } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 import request from 'supertest';
+import { afterAll, beforeAll, expect, test } from 'vitest';
 
 import { AppModule } from '../../src/app.module';
 
@@ -20,9 +22,7 @@ beforeAll(async () => {
 });
 
 test('POST: /sample/memo', async () => {
-  const { status, body } = await request(httpServer)
-    .post('/sample/memo')
-    .send({ title: 'FooBar', content: 'Hello World' });
+  const { status, body } = await request(httpServer).post('/sample/memo').send({ title: 'FooBar', content: 'Hello World' });
 
   expect([200, 201]).toContain(status);
   expect(body).toHaveProperty('id');
@@ -31,26 +31,19 @@ test('POST: /sample/memo', async () => {
 });
 
 test('GET: /sample/memo/:idx', async () => {
-  const { body } = await request(httpServer)
-    .get(`/sample/memo/${idx}`)
-    .expect(200);
+  const { body } = await request(httpServer).get(`/sample/memo/${idx}`).expect(200);
 
   expect(body).toHaveProperty('title', 'FooBar');
 });
 
 test('PUT: /sample/memo/:idx', async () => {
-  const { body } = await request(httpServer)
-    .put(`/sample/memo/${idx}`)
-    .send({ title: 'Blahblahblah' })
-    .expect(200);
+  const { body } = await request(httpServer).put(`/sample/memo/${idx}`).send({ title: 'Blahblahblah' }).expect(200);
 
   expect(body).toHaveProperty('success', true);
 });
 
 test('DELETE: /sample/memo/:idx', async () => {
-  const { body } = await request(httpServer)
-    .delete(`/sample/memo/${idx}`)
-    .expect(200);
+  const { body } = await request(httpServer).delete(`/sample/memo/${idx}`).expect(200);
 
   expect(body).toHaveProperty('success', true);
 });

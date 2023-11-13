@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import type { Prisma, Memo } from '@prisma/client';
-
-import { PrismaService } from '../common';
+import { PrismaService } from 'nestjs-prisma';
 
 /**
  * https://www.prisma.io/docs/concepts/components/prisma-client/crud

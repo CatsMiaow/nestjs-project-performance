@@ -1,40 +1,31 @@
+import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import type { NestExpressApplication } from '@nestjs/platform-express';
-import compression from 'compression';
-import session from 'express-session';
-import helmet from 'helmet';
+import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 
+import { middleware } from './app.middleware';
 import { AppModule } from './app.module';
-import { PrismaService } from './common';
 
-async function bootstrap(): Promise<void> {
-  const isProduction = (process.env.NODE_ENV === 'production');
-  const app = await NestFactory.create<NestExpressApplication>(AppModule, {
-    bufferLogs: true,
+async function bootstrap(): Promise<string> {
+  const isProduction = process.env.NODE_ENV === 'production';
+
+  const app = await NestFactory.create<NestFastifyApplication>(AppModule, new FastifyAdapter({ trustProxy: isProduction }), {
+    bufferLogs: isProduction,
   });
 
-  if (isProduction) {
-    app.enable('trust proxy');
-  }
-
-  //#region Express Middleware
-  app.use(compression());
-  app.use(session({
-    secret: 'tEsTeD',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: 'auto' },
-  }));
-  app.use(helmet());
-  //#endregion
-
-  // https://docs.nestjs.com/recipes/prisma#issues-with-enableshutdownhooks
-  const prismaService = app.get(PrismaService);
-  prismaService.enableShutdownHooks(app);
+  // Fastify Middleware
+  await middleware(app);
 
   app.enableShutdownHooks();
   await app.listen(process.env.PORT || 3000);
+
+  return app.getUrl();
 }
 
-// eslint-disable-next-line no-console
-bootstrap().then(() => console.log('Bootstrap', new Date().toLocaleString())).catch(console.error);
+void (async () => {
+  try {
+    const url = await bootstrap();
+    Logger.log(url, 'Bootstrap');
+  } catch (error) {
+    Logger.error(error, 'Bootstrap');
+  }
+})();
