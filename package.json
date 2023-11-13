@@ -1,7 +1,7 @@
 {
-  "name": "nestjs-prisma-starter",
+  "name": "nestjs-project-performance",
   "version": "0.0.0",
-  "description": "Node.js Nest framework starter with Prisma",
+  "description": "Node.js framework NestJS project for performance",
   "license": "MIT",
   "private": true,
   "scripts": {
