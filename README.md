@@ -6,9 +6,9 @@ If you focus on the performance or features of the module, you can consider usin
 In this example, the changed modules are as follows.
 
 - [Fastify](https://docs.nestjs.com/techniques/performance) instead of `Express`
-- [Prisma](https://docs.nestjs.com/recipes/prisma) instead of `TypeORM` with [nestjs-prisma](https://nestjs-prisma.dev)
+- [Prisma](https://docs.nestjs.com/recipes/prisma) with [nestjs-prisma](https://nestjs-prisma.dev) instead of `TypeORM`
 - [SWC](https://docs.nestjs.com/recipes/swc#swc) instead of `TypeScript compiler`
-- [Vitest](https://docs.nestjs.com/recipes/swc#vitest) instead of `Jest` with [vitest-mock-extended](https://www.npmjs.com/package/vitest-mock-extended)
+- [Vitest](https://docs.nestjs.com/recipes/swc#vitest) with [vitest-mock-extended](https://www.npmjs.com/package/vitest-mock-extended) instead of `Jest`
 
 ## Configuration
 
