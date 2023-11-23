@@ -61,7 +61,9 @@ npm start
 
 - See [app](src/app.ts), [app.module](src/app.module.ts)
 - [Exceptions Filter](src/common/exceptions.filter.ts)
-- [Logging Middleware](src/common/logger.middleware.ts)
+- [Logging Context Middleware](src/common/logger-context.middleware.ts)
+- [Custom Logger](src/config/logger.config.ts) with nestjs-pino
+- [Configuration by Environment](src/config/envs)
 - [JWT Authentication](src/auth)
 - [CRUD API Sample](src/sample)
 - [Unit Test](src/sample/sample.controller.spec.ts)

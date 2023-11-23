@@ -22,7 +22,7 @@ export class SampleController {
 
   constructor(private sample: SampleService) {}
 
-  @Get('memo/:id')
+  @Get('memo/:id') // http://localhost:3000/sample/memo/1
   public async read(@Param('id', ParseIntPipe) id: number): Promise<Memo> {
     this.logger.log('read');
 

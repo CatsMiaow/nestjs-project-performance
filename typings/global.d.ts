@@ -15,5 +15,7 @@ export declare global {
 declare module 'fastify' {
   interface FastifyRequest {
     user: User;
+    // customProps of pino-http
+    customProps: object;
   }
 }
