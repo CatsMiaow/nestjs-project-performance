@@ -42,7 +42,7 @@ Run [http://localhost:3000](http://localhost:3000)
 ## Test
 
 ```sh
-npm test
+npm test # exclude e2e
 npm run test:e2e # only e2e
 ```
 
