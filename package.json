@@ -4,6 +4,9 @@
   "description": "Node.js framework NestJS project for performance",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "lint": "eslint --ext .ts .",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
