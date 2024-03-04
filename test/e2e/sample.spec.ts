@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import type { INestApplication } from '@nestjs/common';
+import type { NestFastifyApplication } from '@nestjs/platform-fastify';
 import { Test } from '@nestjs/testing';
-import request from 'supertest';
+import supertest from 'supertest';
 import { afterAll, beforeAll, expect, test } from 'vitest';
 
 import { AppModule } from '../../src/app.module';
 
-let app: INestApplication | undefined;
-let httpServer: unknown;
+let app: NestFastifyApplication | undefined;
+let request: supertest.Agent;
 let idx: number;
 
 beforeAll(async () => {
@@ -15,14 +15,14 @@ beforeAll(async () => {
     imports: [AppModule],
   }).compile();
 
-  app = moduleFixture.createNestApplication();
+  app = moduleFixture.createNestApplication<NestFastifyApplication>();
   await app.init();
 
-  httpServer = app.getHttpServer();
+  request = supertest.agent(app.getHttpServer());
 });
 
 test('POST: /sample/memo', async () => {
-  const { status, body } = await request(httpServer).post('/sample/memo').send({ title: 'FooBar', content: 'Hello World' });
+  const { status, body } = await request.post('/sample/memo').send({ title: 'FooBar', content: 'Hello World' });
 
   expect([200, 201]).toContain(status);
   expect(body).toHaveProperty('id');
@@ -31,19 +31,19 @@ test('POST: /sample/memo', async () => {
 });
 
 test('GET: /sample/memo/:idx', async () => {
-  const { body } = await request(httpServer).get(`/sample/memo/${idx}`).expect(200);
+  const { body } = await request.get(`/sample/memo/${idx}`).expect(200);
 
   expect(body).toHaveProperty('title', 'FooBar');
 });
 
 test('PUT: /sample/memo/:idx', async () => {
-  const { body } = await request(httpServer).put(`/sample/memo/${idx}`).send({ title: 'Blahblahblah' }).expect(200);
+  const { body } = await request.put(`/sample/memo/${idx}`).send({ title: 'Blahblahblah' }).expect(200);
 
   expect(body).toHaveProperty('success', true);
 });
 
 test('DELETE: /sample/memo/:idx', async () => {
-  const { body } = await request(httpServer).delete(`/sample/memo/${idx}`).expect(200);
+  const { body } = await request.delete(`/sample/memo/${idx}`).expect(200);
 
   expect(body).toHaveProperty('success', true);
 });

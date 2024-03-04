@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import type { INestApplication } from '@nestjs/common';
+import type { NestFastifyApplication } from '@nestjs/platform-fastify';
 import { Test } from '@nestjs/testing';
-import supertest, { SuperTest, Test as AgentTest } from 'supertest';
+import supertest from 'supertest';
 import { afterAll, beforeAll, expect, test } from 'vitest';
 
 import { AppModule } from '../../src/app.module';
 
-let app: INestApplication | undefined;
-let request: SuperTest<AgentTest>;
+let app: NestFastifyApplication | undefined;
+let request: supertest.Agent;
 let token: string;
 
 beforeAll(async () => {
@@ -15,7 +15,7 @@ beforeAll(async () => {
     imports: [AppModule],
   }).compile();
 
-  app = moduleRef.createNestApplication();
+  app = moduleRef.createNestApplication<NestFastifyApplication>();
   await app.init();
 
   request = supertest.agent(app.getHttpServer());
