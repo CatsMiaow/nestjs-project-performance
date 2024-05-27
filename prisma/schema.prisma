@@ -17,6 +17,8 @@ model Memo {
   categories Category[]
   updatedAt  DateTime   @default(now())
   createdAt  DateTime   @default(now())
+
+  @@map("memo")
 }
 
 model Category {
@@ -24,4 +26,6 @@ model Category {
   name   String
   Memo   Memo?  @relation(fields: [memoId], references: [id])
   memoId Int?
+
+  @@map("category")
 }

@@ -44,7 +44,8 @@
     "@typescript-eslint/consistent-type-assertions": ["error", { "assertionStyle": "angle-bracket" }],
     "@typescript-eslint/lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
     "@typescript-eslint/no-extraneous-class": "off",
-    "@typescript-eslint/no-unsafe-member-access": "off"
+    "@typescript-eslint/no-unsafe-member-access": "off",
+    "@typescript-eslint/restrict-template-expressions": ["error", { "allowNumber": true }]
     //#endregion
   }
 }

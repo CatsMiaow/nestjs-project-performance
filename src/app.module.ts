@@ -23,7 +23,6 @@ import { SampleModule } from './sample/sample.module';
     // Static
     ServeStaticModule.forRoot({
       rootPath: `${__dirname}/../public`,
-      renderPath: '/',
     }),
     /**
      * https://docs.nestjs.com/recipes/prisma
