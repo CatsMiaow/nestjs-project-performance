@@ -6,13 +6,13 @@
     "project": true,
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "sonarjs", "prettier"],
+  "plugins": ["@typescript-eslint", "sonarjs", "vitest", "prettier"],
   "extends": [
     "eslint:recommended",
     "airbnb-base",
     "airbnb-typescript/base",
-    "plugin:vitest/recommended",
-    "plugin:sonarjs/recommended",
+    "plugin:vitest/legacy-recommended",
+    "plugin:sonarjs/recommended-legacy",
     "plugin:@typescript-eslint/strict-type-checked",
     "plugin:@typescript-eslint/stylistic-type-checked",
     "plugin:prettier/recommended"

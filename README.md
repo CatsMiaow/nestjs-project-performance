@@ -25,8 +25,9 @@ npm ci
 npx prisma db pull
 # Convert snake_case to PascalCase, camelCase in the generated schema
 npx @paljs/cli schema camel-case
-# 2-2. Write a model and generate it in the database
-npx prisma migrate dev --preview-feature
+# 2-2. Write a model and generate it in the database (one of the following)
+npx prisma db push
+npx prisma migrate dev
 # 3. Apply schema model to @prisma/client
 npx prisma generate
 ```
