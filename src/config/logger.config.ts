@@ -1,14 +1,13 @@
-import { randomUUID } from 'crypto';
-import type { FastifyRequest, RawRequestDefaultExpression, RawServerBase } from 'fastify';
+import type { RawRequestDefaultExpression, RawServerBase } from 'fastify';
 import type { Params } from 'nestjs-pino';
-import { DestinationStream, multistream } from 'pino';
-import type { Options } from 'pino-http';
+import { randomUUID } from 'node:crypto';
+import { multistream } from 'pino';
 
 const passUrl = new Set(['/health']);
 
 export const genReqId = (req: RawRequestDefaultExpression<RawServerBase>) => <string>req.headers['X-Request-Id'] || randomUUID();
 export const loggerOptions = <Params>{
-  pinoHttp: <[Options<FastifyRequest>, DestinationStream]>[
+  pinoHttp: [
     {
       quietReqLogger: true,
       ...(process.env.NODE_ENV === 'production'
