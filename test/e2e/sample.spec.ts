@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import type { NestFastifyApplication } from '@nestjs/platform-fastify';
+import { FastifyAdapter, type NestFastifyApplication } from '@nestjs/platform-fastify';
 import { Test } from '@nestjs/testing';
 import supertest from 'supertest';
 import { afterAll, beforeAll, expect, test } from 'vitest';
@@ -15,8 +15,9 @@ beforeAll(async () => {
     imports: [AppModule],
   }).compile();
 
-  app = moduleFixture.createNestApplication<NestFastifyApplication>();
+  app = moduleFixture.createNestApplication<NestFastifyApplication>(new FastifyAdapter());
   await app.init();
+  await app.getHttpAdapter().getInstance().ready();
 
   request = supertest.agent(app.getHttpServer());
 });
