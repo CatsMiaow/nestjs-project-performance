@@ -24,7 +24,7 @@ model Memo {
 model Category {
   id     Int    @id @default(autoincrement())
   name   String
-  Memo   Memo?  @relation(fields: [memoId], references: [id])
+  memo   Memo?  @relation(fields: [memoId], references: [id])
   memoId Int?
 
   @@map("category")
