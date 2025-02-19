@@ -1,62 +1,78 @@
+import { EntityManager, type EntityRepository } from '@mikro-orm/core';
+import { getRepositoryToken } from '@mikro-orm/nestjs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { Memo } from '@prisma/client';
-import { PrismaService } from 'nestjs-prisma';
 import { afterAll, beforeAll, expect, test } from 'vitest';
-import { DeepMockProxy } from 'vitest-mock-extended';
+import { DeepMockProxy, mockDeep } from 'vitest-mock-extended';
 
 import { SampleController } from './sample.controller';
 import { SampleService } from './sample.service';
-import { MockPrismaModule } from '../../test/mock';
+import { Category, Memo } from '../entities/test';
 
 let app: TestingModule | undefined;
-let prisma: DeepMockProxy<PrismaService>;
+let repository: DeepMockProxy<EntityRepository<Memo>>;
 let sample: SampleController;
 let mockValue: Memo;
 
 beforeAll(async () => {
   app = await Test.createTestingModule({
-    imports: [MockPrismaModule],
     controllers: [SampleController],
-    providers: [SampleService],
+    providers: [
+      SampleService,
+      {
+        provide: getRepositoryToken(Memo),
+        useValue: mockDeep<EntityRepository<Memo>>(),
+      },
+      {
+        provide: getRepositoryToken(Category),
+        useValue: mockDeep<EntityRepository<Category>>(),
+      },
+      {
+        provide: EntityManager,
+        useValue: mockDeep<EntityManager>(),
+      },
+    ],
   }).compile();
 
-  prisma = app.get(PrismaService);
+  const em: DeepMockProxy<EntityManager> = app.get(EntityManager);
+  em.flush.mockResolvedValueOnce(undefined);
+
+  repository = app.get(getRepositoryToken(Memo));
   sample = app.get(SampleController);
 });
 
 test('create memo', async () => {
-  mockValue = {
+  mockValue = <Memo>{
     id: 1,
     title: 'FooBar',
     content: 'Hello World',
     updatedAt: new Date(),
     createdAt: new Date(),
   };
-  prisma.memo.create.mockResolvedValueOnce(mockValue);
+  repository.create.mockResolvedValueOnce(mockValue);
 
   const result = await sample.create({ title: 'FooBar', content: 'Hello World' });
   expect(result).toHaveProperty('id', 1);
 });
 
 test('read memo', async () => {
-  prisma.memo.findUnique.mockResolvedValueOnce(mockValue);
+  repository.findOne.mockResolvedValueOnce(mockValue);
 
   expect(await sample.read(1)).toHaveProperty('id', 1);
 });
 
 test('update memo', async () => {
   mockValue.title = 'Blahblahblah';
-  prisma.memo.update.mockResolvedValueOnce(mockValue);
+  repository.findOneOrFail.mockResolvedValueOnce(mockValue);
 
   const result = await sample.update(1, { title: mockValue.title });
-  expect(result).toHaveProperty('success', true);
+  expect(result).toHaveProperty('title', mockValue.title);
 });
 
 test('delete memo', async () => {
-  prisma.memo.delete.mockResolvedValueOnce(mockValue);
+  repository.nativeDelete.mockResolvedValueOnce(1);
 
   const result = await sample.remove(1);
-  expect(result).toHaveProperty('success', true);
+  expect(result).toHaveProperty('result', 1);
 });
 
 afterAll(async () => {

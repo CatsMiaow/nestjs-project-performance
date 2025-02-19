@@ -11,10 +11,10 @@ import {
   ParseIntPipe,
   Logger,
 } from '@nestjs/common';
-import type { Memo } from '@prisma/client';
 
 import { SampleDto } from './sample.dto';
 import { SampleService } from './sample.service';
+import { Memo } from '../entities/test';
 
 @Controller('sample')
 export class SampleController {
@@ -47,20 +47,20 @@ export class SampleController {
   }
 
   @Put('memo/:id')
-  public async update(@Param('id', ParseIntPipe) id: number, @Body() body: SampleDto): Promise<{ success: boolean }> {
+  public async update(@Param('id', ParseIntPipe) id: number, @Body() body: SampleDto): Promise<Memo> {
     this.logger.log('update');
 
     const result = await this.sample.update(id, body);
 
-    return { success: !!result.id };
+    return result;
   }
 
   @Delete('memo/:id')
-  public async remove(@Param('id', ParseIntPipe) id: number): Promise<{ success: boolean }> {
+  public async remove(@Param('id', ParseIntPipe) id: number): Promise<{ result: number }> {
     this.logger.log('remove');
 
     const result = await this.sample.remove(id);
 
-    return { success: !!result.id };
+    return { result };
   }
 }

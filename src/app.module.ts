@@ -1,9 +1,11 @@
+import type { MikroORMOptions } from '@mikro-orm/core';
+import { MySqlDriver } from '@mikro-orm/mysql';
+import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { LoggerModule } from 'nestjs-pino';
-import { PrismaModule } from 'nestjs-prisma';
 
 import { AuthModule } from './auth/auth.module';
 import { ExceptionsFilter } from './common';
@@ -25,23 +27,14 @@ import { SampleModule } from './sample/sample.module';
       rootPath: `${__dirname}/../public`,
     }),
     /**
-     * https://docs.nestjs.com/recipes/prisma
-     * https://www.prisma.io/nestjs
-     * https://nestjs-prisma.dev
+     * https://docs.nestjs.com/recipes/mikroorm
+     * https://mikro-orm.io/docs/usage-with-nestjs
+     * https://mikro-orm.io
      */
-    PrismaModule.forRootAsync({
-      isGlobal: true,
-      useFactory: (config: ConfigService) => ({
-        prismaOptions: {
-          ...config.get('prismaOptions'),
-          datasources: {
-            db: {
-              url: config.getOrThrow('DATABASE_URL'),
-            },
-          },
-        },
-      }),
+    MikroOrmModule.forRootAsync({
+      useFactory: (config: ConfigService) => config.getOrThrow<MikroORMOptions>('mikro'),
       inject: [ConfigService],
+      driver: MySqlDriver,
     }),
     // Global
     CommonModule,

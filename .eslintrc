@@ -22,6 +22,7 @@
     // These rules are for reference only.
     //#region eslint
     "class-methods-use-this": "off",
+    "no-continue": "off",
     "no-restricted-syntax": ["error", "ForInStatement", "LabeledStatement", "WithStatement"],
     "no-void": ["error", { "allowAsStatement": true }],
     "spaced-comment": ["error", "always", { "line": { "markers": ["/", "#region", "#endregion"] } }],

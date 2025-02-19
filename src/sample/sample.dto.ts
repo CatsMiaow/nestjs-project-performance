@@ -1,7 +1,6 @@
-import { Prisma } from '@prisma/client';
 import { IsOptional, IsString, ArrayNotEmpty } from 'class-validator';
 
-export class SampleDto implements Prisma.MemoCreateInput {
+export class SampleDto {
   @IsString()
   public title!: string;
 
@@ -11,5 +10,5 @@ export class SampleDto implements Prisma.MemoCreateInput {
 
   @IsOptional()
   @ArrayNotEmpty()
-  public categories?: Prisma.CategoryCreateNestedManyWithoutMemoInput;
+  public categories?: string[];
 }
