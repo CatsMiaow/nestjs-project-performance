@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies, no-console */
+/* eslint-disable no-console */
 import { select } from '@inquirer/prompts';
 import { MikroORM } from '@mikro-orm/core';
 import { EntityGenerator } from '@mikro-orm/entity-generator';
