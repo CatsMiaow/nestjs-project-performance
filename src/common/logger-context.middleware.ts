@@ -1,4 +1,4 @@
-import { Injectable, NestMiddleware } from '@nestjs/common';
+import { Injectable, type NestMiddleware } from '@nestjs/common';
 import { PinoLogger } from 'nestjs-pino';
 import type { IncomingMessage, ServerResponse } from 'node:http';
 

@@ -2,8 +2,8 @@ import { EntityManager, type EntityRepository, type Loaded } from '@mikro-orm/co
 import { InjectRepository } from '@mikro-orm/nestjs';
 import { Injectable } from '@nestjs/common';
 
-import type { SampleDto } from './sample.dto';
-import { Category, Memo } from '../entities/test';
+import type { SampleDto } from './sample.dto.js';
+import { Category, Memo } from '../entities/test/index.js';
 
 @Injectable()
 export class SampleService {

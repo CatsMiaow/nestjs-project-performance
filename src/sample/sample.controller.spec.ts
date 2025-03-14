@@ -2,11 +2,11 @@ import { EntityManager, type EntityRepository } from '@mikro-orm/core';
 import { getRepositoryToken } from '@mikro-orm/nestjs';
 import { Test, TestingModule } from '@nestjs/testing';
 import { afterAll, beforeAll, expect, test } from 'vitest';
-import { DeepMockProxy, mockDeep } from 'vitest-mock-extended';
+import { type DeepMockProxy, mockDeep } from 'vitest-mock-extended';
 
-import { SampleController } from './sample.controller';
-import { SampleService } from './sample.service';
-import { Category, Memo } from '../entities/test';
+import { SampleController } from './sample.controller.js';
+import { SampleService } from './sample.service.js';
+import { Category, Memo } from '../entities/test/index.js';
 
 let app: TestingModule | undefined;
 let repository: DeepMockProxy<EntityRepository<Memo>>;

@@ -12,9 +12,9 @@ import {
   Logger,
 } from '@nestjs/common';
 
-import { SampleDto } from './sample.dto';
-import { SampleService } from './sample.service';
-import { Memo } from '../entities/test';
+import { SampleDto } from './sample.dto.js';
+import { SampleService } from './sample.service.js';
+import { Memo } from '../entities/test/index.js';
 
 @Controller('sample')
 export class SampleController {

@@ -1,6 +1,6 @@
 import { Collection, Entity, ManyToMany, type Opt, PrimaryKey, Property } from '@mikro-orm/core';
 
-import { Category } from './category';
+import { Category } from './category.js';
 
 @Entity({ tableName: 'memo' })
 export class Memo {

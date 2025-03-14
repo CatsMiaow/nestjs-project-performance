@@ -1,9 +1,9 @@
 import { Controller, Get, Post, UseGuards, Req } from '@nestjs/common';
 import type { FastifyRequest } from 'fastify';
 
-import type { Payload } from './auth.interface';
-import { AuthService } from './auth.service';
-import { JwtAuthGuard, LocalAuthGuard } from './guards';
+import type { Payload } from './auth.interface.js';
+import { AuthService } from './auth.service.js';
+import { JwtAuthGuard, LocalAuthGuard } from './guards/index.js';
 
 @Controller()
 export class AuthController {

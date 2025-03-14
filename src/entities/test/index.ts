@@ -1,2 +1,2 @@
-export * from './category';
-export * from './memo';
+export * from './category.js';
+export * from './memo.js';

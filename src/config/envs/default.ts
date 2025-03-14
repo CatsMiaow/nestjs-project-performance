@@ -4,8 +4,8 @@ import type { MikroOrmModuleOptions } from '@mikro-orm/nestjs';
 export const config = {
   mikro: {
     driver: MySqlDriver,
-    // entities: [`${__dirname}/../../entities`],
-    // entitiesTs: [`${__dirname}/../../entities`],
+    // entities: [`${import.meta.dirname}/../../entities`],
+    // entitiesTs: [`${import.meta.dirname}/../../entities`],
     autoLoadEntities: true,
     dbName: 'test',
     // timezone: '+09:00',
