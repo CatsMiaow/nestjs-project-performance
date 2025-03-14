@@ -1,15 +1,17 @@
+/* eslint-disable import/no-default-export */
 import eslint from '@eslint/js';
+import vitest from '@vitest/eslint-plugin';
+import importPlugin from 'eslint-plugin-import';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import sonarjs from 'eslint-plugin-sonarjs';
-import tseslint from 'typescript-eslint';
-import vitest from '@vitest/eslint-plugin';
+import tseslint, { configs, plugin } from 'typescript-eslint';
 
 // https://eslint.org/docs/latest/use/configure/configuration-files#typescript-configuration-files
 export default tseslint.config(
   eslint.configs.recommended,
-  tseslint.configs.recommendedTypeChecked,
-  tseslint.configs.strictTypeChecked,
-  tseslint.configs.stylisticTypeChecked,
+  configs.recommendedTypeChecked,
+  configs.strictTypeChecked,
+  configs.stylisticTypeChecked,
   prettierRecommended,
   sonarjs.configs.recommended,
   vitest.configs.recommended,
@@ -27,8 +29,16 @@ export default tseslint.config(
       },
     },
     plugins: {
-      '@typescript-eslint': tseslint.plugin,
+      '@typescript-eslint': plugin,
       vitest,
+    },
+    // https://github.com/import-js/eslint-plugin-import?tab=readme-ov-file#config---flat-with-config-in-typescript-eslint
+    extends: [importPlugin.flatConfigs.recommended, importPlugin.flatConfigs.typescript],
+    settings: {
+      'import/resolver': {
+        typescript: true,
+        node: true,
+      },
     },
     // These rules are for reference only.
     rules: {
@@ -39,6 +49,19 @@ export default tseslint.config(
       'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
       'no-void': ['error', { allowAsStatement: true }],
       'spaced-comment': ['error', 'always', { line: { markers: ['/', '#region', '#endregion'] } }],
+      //#endregion
+
+      //#region import
+      'import/no-default-export': 'error',
+      'import/order': [
+        'error',
+        {
+          groups: [['builtin', 'external', 'internal']],
+          'newlines-between': 'always',
+          alphabetize: { order: 'asc', caseInsensitive: true },
+        },
+      ],
+      'import/prefer-default-export': 'off',
       //#endregion
 
       //#region @typescript-eslint
