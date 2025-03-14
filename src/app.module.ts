@@ -7,11 +7,11 @@ import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { LoggerModule } from 'nestjs-pino';
 
-import { AuthModule } from './auth/auth.module';
-import { ExceptionsFilter } from './common';
-import { CommonModule } from './common/common.module';
-import { configuration, loggerOptions } from './config';
-import { SampleModule } from './sample/sample.module';
+import { AuthModule } from './auth/auth.module.js';
+import { ExceptionsFilter } from './common/index.js';
+import { CommonModule } from './common/common.module.js';
+import { configuration, loggerOptions } from './config/index.js';
+import { SampleModule } from './sample/sample.module.js';
 
 @Module({
   imports: [
@@ -24,7 +24,7 @@ import { SampleModule } from './sample/sample.module';
     }),
     // Static
     ServeStaticModule.forRoot({
-      rootPath: `${__dirname}/../public`,
+      rootPath: `${import.meta.dirname}/../public`,
     }),
     /**
      * https://docs.nestjs.com/recipes/mikroorm

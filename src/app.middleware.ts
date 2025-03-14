@@ -4,7 +4,7 @@ import helmet from '@fastify/helmet';
 import { Authenticator } from '@fastify/passport';
 import session from '@fastify/session';
 import type { INestApplication } from '@nestjs/common';
-import { NestFastifyApplication } from '@nestjs/platform-fastify';
+import type { NestFastifyApplication } from '@nestjs/platform-fastify';
 
 export async function middleware(app: NestFastifyApplication): Promise<INestApplication> {
   const isProduction = process.env.NODE_ENV === 'production';

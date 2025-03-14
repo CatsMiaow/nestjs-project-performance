@@ -1,9 +1,9 @@
 import { MikroOrmModule } from '@mikro-orm/nestjs';
 import { Module } from '@nestjs/common';
 
-import { SampleController } from './sample.controller';
-import { SampleService } from './sample.service';
-import { Category, Memo } from '../entities/test';
+import { SampleController } from './sample.controller.js';
+import { SampleService } from './sample.service.js';
+import { Category, Memo } from '../entities/test/index.js';
 
 @Module({
   imports: [MikroOrmModule.forFeature([Memo, Category])],

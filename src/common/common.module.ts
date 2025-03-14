@@ -1,6 +1,6 @@
-import { Global, MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { Global, type MiddlewareConsumer, Module, type NestModule } from '@nestjs/common';
 
-import { LoggerContextMiddleware } from './logger-context.middleware';
+import { LoggerContextMiddleware } from './logger-context.middleware.js';
 
 @Global()
 @Module({

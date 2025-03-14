@@ -6,7 +6,7 @@ import { config as dotfig } from 'dotenv';
 import { readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { configuration } from '../src/config';
+import { configuration } from '../src/config/index.js';
 
 dotfig();
 if (!process.env['DB_HOST']) {
@@ -46,21 +46,21 @@ function pascalToHyphen(fileName: string): string {
     // bidirectionalRelations: true,
     // identifiedReferences: true,
     save: true,
-    path: `${__dirname}/../src/entities/${dbName}`,
+    path: `${import.meta.dirname}/../src/entities/${dbName}`,
     fileName: (className: string) => {
       return pascalToHyphen(className);
     },
   });
   await orm.close(true);
 
-  const entityDir = join(__dirname, '../src/entities', dbName);
+  const entityDir = join(import.meta.dirname, '../src/entities', dbName);
   const files = [];
 
   for (const file of readdirSync(entityDir)) {
     if (file === 'index.ts') {
       continue;
     }
-    files.push(`export * from './${file.replace('.ts', '')}';`);
+    files.push(`export * from './${file.replace('.ts', '.js')}';`);
   }
   files.push('');
   // export entities db tables

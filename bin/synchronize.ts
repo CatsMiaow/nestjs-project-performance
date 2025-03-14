@@ -3,7 +3,7 @@ import { select } from '@inquirer/prompts';
 import { MikroORM } from '@mikro-orm/core';
 import { config as dotfig } from 'dotenv';
 
-import { configuration } from '../src/config';
+import { configuration } from '../src/config/index.js';
 
 dotfig();
 if (!process.env['DB_HOST']) {
@@ -24,8 +24,8 @@ if (!process.env['DB_HOST']) {
   });
 
   const orm = await MikroORM.init({
-    entities: [`${__dirname}/../src/entities/${dbName}`],
-    entitiesTs: [`${__dirname}/../src/entities/${dbName}`],
+    entities: [`${import.meta.dirname}/../src/entities/${dbName}`],
+    entitiesTs: [`${import.meta.dirname}/../src/entities/${dbName}`],
     driver: config.driver,
     host: config.host,
     user: config.user,

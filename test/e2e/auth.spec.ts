@@ -1,10 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, sonarjs/no-hardcoded-credentials */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { FastifyAdapter, type NestFastifyApplication } from '@nestjs/platform-fastify';
 import { Test } from '@nestjs/testing';
 import supertest from 'supertest';
 import { afterAll, beforeAll, expect, test } from 'vitest';
 
-import { AppModule } from '../../src/app.module';
+import { AppModule } from '../../src/app.module.js';
 
 let app: NestFastifyApplication | undefined;
 let request: supertest.Agent;
@@ -23,6 +23,7 @@ beforeAll(async () => {
 });
 
 test('POST: /auth/login', async () => {
+  // eslint-disable-next-line sonarjs/no-hardcoded-passwords
   const { status, body } = await request.post('/auth/login').send({ username: 'foobar', password: 'crypto' });
 
   expect([200, 201]).toContain(status);

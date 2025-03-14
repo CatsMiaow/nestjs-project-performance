@@ -1,11 +1,11 @@
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
+import { FastifyAdapter, type NestFastifyApplication } from '@nestjs/platform-fastify';
 import { Logger as PinoLogger, LoggerErrorInterceptor } from 'nestjs-pino';
 
-import { middleware } from './app.middleware';
-import { AppModule } from './app.module';
-import { genReqId } from './config';
+import { middleware } from './app.middleware.js';
+import { AppModule } from './app.module.js';
+import { genReqId } from './config/index.js';
 
 async function bootstrap(): Promise<string> {
   const isProduction = process.env.NODE_ENV === 'production';

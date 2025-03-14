@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 
-import type { JwtPayload } from './auth.interface';
-import { User, UserService } from '../user';
+import type { JwtPayload } from './auth.interface.js';
+import { type User, UserService } from '../user/index.js';
 
 @Injectable()
 export class AuthService {
@@ -15,7 +15,7 @@ export class AuthService {
     const user = await this.user.fetch(username);
 
     if (user?.password === password) {
-      // eslint-disable-next-line sonarjs/sonar-no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars, sonarjs/no-unused-vars
       const { password: pass, ...result } = user;
       return result;
     }

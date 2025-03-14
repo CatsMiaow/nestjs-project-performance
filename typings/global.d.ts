@@ -1,4 +1,4 @@
-import type { User } from '../src/user';
+import type { User } from '../src/user/index.ts';
 
 export declare global {
   namespace NodeJS {
