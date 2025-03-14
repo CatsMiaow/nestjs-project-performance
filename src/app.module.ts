@@ -1,16 +1,16 @@
 import type { MikroORMOptions } from '@mikro-orm/core';
 import { MySqlDriver } from '@mikro-orm/mysql';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
-import { Module, ValidationPipe } from '@nestjs/common';
+import { Module, ValidationPipe, type MiddlewareConsumer, type NestModule } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { LoggerModule } from 'nestjs-pino';
 
 import { AuthModule } from './auth/auth.module.js';
-import { ExceptionsFilter } from './common/index.js';
-import { CommonModule } from './common/common.module.js';
+import { CommonModule, ExceptionsFilter, LoggerContextMiddleware } from './common/index.js';
 import { configuration, loggerOptions } from './config/index.js';
+import { HealthModule } from './health/health.module.js';
 import { SampleModule } from './sample/sample.module.js';
 
 @Module({
@@ -38,6 +38,8 @@ import { SampleModule } from './sample/sample.module.js';
     }),
     // Global
     CommonModule,
+    // Terminus
+    HealthModule,
     // Authentication
     AuthModule,
     // API Sample
@@ -57,4 +59,9 @@ import { SampleModule } from './sample/sample.module.js';
     },
   ],
 })
-export class AppModule {}
+export class AppModule implements NestModule {
+  // Global Middleware
+  public configure(consumer: MiddlewareConsumer): void {
+    consumer.apply(LoggerContextMiddleware).forRoutes('*');
+  }
+}
