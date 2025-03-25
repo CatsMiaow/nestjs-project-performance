@@ -19,7 +19,8 @@
     "test:e2e": "vitest run --config ./test/vitest.e2e.ts",
     "esm": "node --import @swc-node/register/esm-register",
     "entity:load": "npm run esm ./bin/entities.ts",
-    "entity:sync": "npm run esm ./bin/synchronize.ts"
+    "entity:sync": "npm run esm ./bin/synchronize.ts",
+    "doc:api": "nest build && node dist/swagger"
   },
   "dependencies": {
     "@fastify/compress": "^8.0.1",
@@ -38,6 +39,7 @@
     "@nestjs/passport": "^11.0.5",
     "@nestjs/platform-fastify": "^11.0.12",
     "@nestjs/serve-static": "^5.0.3",
+    "@nestjs/swagger": "github:CatsMiaow/swagger#fix/esm-compatible",
     "@nestjs/terminus": "^11.0.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.1",
