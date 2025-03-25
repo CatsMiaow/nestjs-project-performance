@@ -1,0 +1,7 @@
+/* eslint-disable */
+export default async () => {
+    const t = {
+        ["./entities/test/memo.entity.js"]: await import("./entities/test/memo.entity.js")
+    };
+    return { "@nestjs/swagger": { "models": [[import("./sample/sample.dto.js"), { "SampleDto": { title: { required: true, type: () => String }, content: { required: false, type: () => String }, categories: { required: false, type: () => [String], minItems: 1 } } }], [import("./entities/test/memo.entity.js"), { "Memo": { id: { required: true, type: () => Number }, title: { required: true, type: () => String }, content: { required: false, type: () => String }, categories: { required: true, type: () => Object }, updatedAt: { required: true, type: () => Object }, createdAt: { required: true, type: () => Object } } }], [import("./entities/test/category.entity.js"), { "Category": { id: { required: true, type: () => Number }, name: { required: true, type: () => String }, memos: { required: true, type: () => Object }, updatedAt: { required: true, type: () => Object }, createdAt: { required: true, type: () => Object } } }]], "controllers": [[import("./auth/auth.controller.js"), { "AuthController": { "login": {}, "check": { type: Object } } }], [import("./health/health.controller.js"), { "HealthController": { "check": { type: Object } } }], [import("./sample/sample.controller.js"), { "SampleController": { "read": { type: t["./entities/test/memo.entity.js"].Memo }, "create": {}, "update": { type: t["./entities/test/memo.entity.js"].Memo }, "remove": {} } }]] } };
+};

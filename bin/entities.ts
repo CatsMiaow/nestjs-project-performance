@@ -48,7 +48,7 @@ function pascalToHyphen(fileName: string): string {
     save: true,
     path: `${import.meta.dirname}/../src/entities/${dbName}`,
     fileName: (className: string) => {
-      return pascalToHyphen(className);
+      return `${pascalToHyphen(className)}.entity`;
     },
   });
   await orm.close(true);

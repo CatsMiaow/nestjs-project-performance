@@ -1,20 +1,17 @@
 import { Collection, Entity, ManyToMany, type Opt, PrimaryKey, Property } from '@mikro-orm/core';
 
-import { Category } from './category.js';
+import { Memo } from './memo.entity.js';
 
-@Entity({ tableName: 'memo' })
-export class Memo {
+@Entity({ tableName: 'category' })
+export class Category {
   @PrimaryKey()
   id!: number;
 
-  @Property()
-  title!: string;
+  @Property({ unique: true })
+  name!: string;
 
-  @Property({ nullable: true })
-  content?: string;
-
-  @ManyToMany(() => Category, 'memos', { owner: true, nullable: true })
-  categories = new Collection<Category>(this);
+  @ManyToMany(() => Memo, 'categories', { nullable: true })
+  memos = new Collection<Memo>(this);
 
   @Property({ type: 'datetime', columnType: 'timestamp', defaultRaw: `CURRENT_TIMESTAMP` })
   updatedAt!: Date & Opt;
