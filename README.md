@@ -9,6 +9,7 @@ In this example, the changed modules are as follows.
 - [MikroORM](https://docs.nestjs.com/recipes/mikroorm) with [@mikro-orm/nestjs](https://mikro-orm.io/docs/usage-with-nestjs) instead of `TypeORM`
 - [SWC](https://docs.nestjs.com/recipes/swc#swc) instead of `TypeScript compiler`
 - [Vitest](https://docs.nestjs.com/recipes/swc#vitest) with [vitest-mock-extended](https://www.npmjs.com/package/vitest-mock-extended) instead of `Jest`
+- [ESM](https://nodejs.org/api/esm.html) instead of `CommonJS`
 
 ## Configuration
 
