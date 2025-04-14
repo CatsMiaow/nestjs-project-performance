@@ -54,6 +54,13 @@ npm run build
 node dist/app.js
 ```
 
+## Documentation
+
+```sh
+# API, Swagger - src/swagger.ts
+npm run doc:api #> http://localhost:8000/api
+```
+
 ## Implements
 
 - See [app](src/app.ts), [app.module](src/app.module.ts)

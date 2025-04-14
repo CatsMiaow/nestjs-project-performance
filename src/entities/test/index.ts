@@ -1,2 +1,2 @@
-export * from './category.js';
-export * from './memo.js';
+export * from './category.entity.js';
+export * from './memo.entity.js';

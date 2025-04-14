@@ -6,6 +6,13 @@
     "tsConfigPath": "tsconfig.build.json",
     "deleteOutDir": true,
     "builder": "swc",
-    "typeCheck": true
+    "typeCheck": true,
+    "plugins": [{
+      "name": "@nestjs/swagger",
+      "options": {
+        "introspectComments": true,
+        "esmCompatible": true
+      }
+    }]
   }
 }
