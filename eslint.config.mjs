@@ -71,6 +71,11 @@ export default tseslint.config(
       '@typescript-eslint/no-unsafe-member-access': 'off',
       '@typescript-eslint/restrict-template-expressions': ['error', { allowNumber: true }],
       //#endregion
+
+      //#region sonarjs
+      // https://community.sonarsource.com/t/eslint-plugin-sonarjs-performance-issues-on-large-codebase/138392
+      'sonarjs/no-commented-code': 'off',
+      //#endregion
     },
   },
 );
