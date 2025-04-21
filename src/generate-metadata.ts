@@ -11,6 +11,6 @@ generator.generate({
     }),
   ],
   outputDir: import.meta.dirname,
-  watch: true,
+  watch: false,
   tsconfigPath: 'tsconfig.json',
 });
