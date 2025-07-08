@@ -7,10 +7,10 @@ generator.generate({
     new ReadonlyVisitor({
       introspectComments: true,
       esmCompatible: true,
-      pathToSource: import.meta.dirname,
+      pathToSource: `${import.meta.dirname}/../src`,
     }),
   ],
-  outputDir: import.meta.dirname,
+  outputDir: `${import.meta.dirname}/../src`,
   watch: false,
   tsconfigPath: 'tsconfig.json',
 });

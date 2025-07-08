@@ -59,7 +59,7 @@ node dist/app.js
 ```sh
 # https://docs.nestjs.com/openapi/cli-plugin#swc-builder
 # Update the metadata before running the swagger server.
-npm run esm src/generate-metadata.ts
+npm run esm bin/generate-metadata.ts
 # API, Swagger - src/swagger.ts
 npm run doc:api #> http://localhost:8000/api
 ```
