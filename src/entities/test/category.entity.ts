@@ -1,4 +1,5 @@
-import { Collection, Entity, ManyToMany, type Opt, PrimaryKey, Property } from '@mikro-orm/core';
+import { Collection, type Opt } from '@mikro-orm/core';
+import { Entity, ManyToMany, PrimaryKey, Property } from '@mikro-orm/decorators/legacy';
 
 import { Memo } from './memo.entity.js';
 

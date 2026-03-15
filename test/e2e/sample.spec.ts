@@ -52,7 +52,7 @@ test('PUT: /sample/memo/:idx', async () => {
   expect(body).toHaveProperty('title', 'Blahblahblah');
 });
 
-test.skip('DELETE: /sample/memo/:idx', async () => {
+test('DELETE: /sample/memo/:idx', async () => {
   const { body } = await request.delete(`/sample/memo/${idx}`).expect(200);
 
   expect(body).toHaveProperty('result', 1);

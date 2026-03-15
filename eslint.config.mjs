@@ -5,6 +5,7 @@ import { defineConfig } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import sonarjs from 'eslint-plugin-sonarjs';
+import neostandard from 'neostandard';
 import { configs, plugin } from 'typescript-eslint';
 
 // https://eslint.org/docs/latest/use/configure/configuration-files#typescript-configuration-files
@@ -13,6 +14,7 @@ export default defineConfig(
   configs.recommendedTypeChecked,
   configs.strictTypeChecked,
   configs.stylisticTypeChecked,
+  ...neostandard({ env: ['node'], ts: true, semi: true, noJsx: true }),
   prettierRecommended,
   sonarjs.configs.recommended,
   vitest.configs.recommended,
@@ -49,7 +51,7 @@ export default defineConfig(
       'no-continue': 'off',
       'no-restricted-syntax': ['error', 'ForInStatement', 'LabeledStatement', 'WithStatement'],
       'no-void': ['error', { allowAsStatement: true }],
-      'spaced-comment': ['error', 'always', { line: { markers: ['/', '#region', '#endregion'] } }],
+      '@stylistic/spaced-comment': ['error', 'always', { line: { markers: ['/', '#region', '#endregion'] } }],
       //#endregion
 
       //#region import

@@ -13,8 +13,6 @@ export const config = {
       min: 0,
       max: 5,
       idleTimeoutMillis: 10000,
-      acquireTimeoutMillis: 10000,
-      destroyTimeoutMillis: 60000,
     },
   } satisfies MikroOrmModuleOptions<MySqlDriver>,
 };

@@ -1,11 +1,15 @@
 /* eslint-disable no-console */
 import { select } from '@inquirer/prompts';
 import { MikroORM } from '@mikro-orm/core';
-import { config as dotfig } from 'dotenv';
+import { ReflectMetadataProvider } from '@mikro-orm/decorators/legacy';
+import { loadEnvFile } from 'node:process';
 
 import { configuration } from '../src/config/index.js';
 
-dotfig();
+try {
+  loadEnvFile();
+} catch {}
+
 if (!process.env['DB_HOST']) {
   throw new Error('Create a .env file');
 }
@@ -24,9 +28,10 @@ if (!process.env['DB_HOST']) {
   });
 
   const orm = await MikroORM.init({
+    driver: config.driver,
+    metadataProvider: ReflectMetadataProvider,
     entities: [`${import.meta.dirname}/../src/entities/${dbName}`],
     entitiesTs: [`${import.meta.dirname}/../src/entities/${dbName}`],
-    driver: config.driver,
     host: config.host,
     user: config.user,
     password: config.password,
@@ -41,7 +46,7 @@ if (!process.env['DB_HOST']) {
   console.log(createDump);
 
   // DIY
-  await generator.createSchema();
+  await generator.create();
 
   await orm.close(true);
 })().catch((error: unknown) => {

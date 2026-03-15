@@ -1,5 +1,6 @@
 import type { MySqlDriver } from '@mikro-orm/mysql';
 import type { MikroOrmModuleOptions } from '@mikro-orm/nestjs';
+import { type PoolOptions } from 'mysql2';
 
 export const config = {
   env: 'production',
@@ -19,9 +20,12 @@ export const config = {
     pool: {
       min: 0,
       max: 30,
-      idleTimeoutMillis: 10000,
-      acquireTimeoutMillis: 10000,
-      destroyTimeoutMillis: 60000,
+      idleTimeoutMillis: 30000,
+    },
+    driverOptions: {
+      pool: {
+        // connectTimeout: 10000,
+      } satisfies PoolOptions,
     },
   } satisfies MikroOrmModuleOptions<MySqlDriver>,
 };

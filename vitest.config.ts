@@ -1,6 +1,10 @@
 /* eslint-disable import/no-default-export */
-import swc from 'unplugin-swc';
+import { loadEnvFile } from 'node:process';
 import { defineConfig } from 'vitest/config';
+
+try {
+  loadEnvFile();
+} catch {}
 
 export default defineConfig({
   test: {
@@ -8,5 +12,4 @@ export default defineConfig({
     root: './',
     testTimeout: 30_000,
   },
-  plugins: [swc.vite()],
 });

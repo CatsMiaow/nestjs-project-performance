@@ -2,13 +2,16 @@
 import { select } from '@inquirer/prompts';
 import { MikroORM } from '@mikro-orm/core';
 import { EntityGenerator } from '@mikro-orm/entity-generator';
-import { config as dotfig } from 'dotenv';
 import { readdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
+import { loadEnvFile } from 'node:process';
 
 import { configuration } from '../src/config/index.js';
 
-dotfig();
+try {
+  loadEnvFile();
+} catch {}
+
 if (!process.env['DB_HOST']) {
   throw new Error('Create a .env file');
 }
@@ -43,8 +46,10 @@ function pascalToHyphen(fileName: string): string {
   });
 
   await orm.entityGenerator.generate({
-    // bidirectionalRelations: true,
-    // identifiedReferences: true,
+    bidirectionalRelations: true,
+    identifiedReferences: true,
+    entityDefinition: 'decorators',
+    decorators: 'legacy',
     save: true,
     path: `${import.meta.dirname}/../src/entities/${dbName}`,
     fileName: (className: string) => {

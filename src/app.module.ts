@@ -1,7 +1,8 @@
-import type { MikroORMOptions } from '@mikro-orm/core';
+import { MikroORM } from '@mikro-orm/core';
 import { MySqlDriver } from '@mikro-orm/mysql';
 import { MikroOrmModule } from '@mikro-orm/nestjs';
-import { Module, ValidationPipe, type MiddlewareConsumer, type NestModule } from '@nestjs/common';
+import type { MikroOrmModuleOptions } from '@mikro-orm/nestjs';
+import { Module, ValidationPipe, type MiddlewareConsumer, type NestModule, type OnApplicationBootstrap } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { APP_FILTER, APP_PIPE } from '@nestjs/core';
 import { ServeStaticModule } from '@nestjs/serve-static';
@@ -32,7 +33,7 @@ import { SampleModule } from './sample/sample.module.js';
      * https://mikro-orm.io
      */
     MikroOrmModule.forRootAsync({
-      useFactory: (config: ConfigService) => config.getOrThrow<MikroORMOptions>('mikro'),
+      useFactory: (config: ConfigService) => config.getOrThrow<MikroOrmModuleOptions<MySqlDriver>>('mikro'),
       inject: [ConfigService],
       driver: MySqlDriver,
     }),
@@ -59,7 +60,13 @@ import { SampleModule } from './sample/sample.module.js';
     },
   ],
 })
-export class AppModule implements NestModule {
+export class AppModule implements NestModule, OnApplicationBootstrap {
+  constructor(private orm: MikroORM) {}
+
+  async onApplicationBootstrap(): Promise<void> {
+    await this.orm.connect();
+  }
+
   // Global Middleware
   public configure(consumer: MiddlewareConsumer): void {
     consumer.apply(LoggerContextMiddleware).forRoutes('*');
