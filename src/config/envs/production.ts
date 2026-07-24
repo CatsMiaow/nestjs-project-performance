@@ -20,7 +20,7 @@ export const config = {
     pool: {
       min: 0,
       max: 30,
-      idleTimeoutMillis: 30000,
+      idleTimeoutMillis: 30_000,
     },
     driverOptions: {
       pool: {

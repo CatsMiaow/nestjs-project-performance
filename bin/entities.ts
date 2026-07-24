@@ -3,7 +3,7 @@ import { select } from '@inquirer/prompts';
 import { MikroORM } from '@mikro-orm/core';
 import { EntityGenerator } from '@mikro-orm/entity-generator';
 import { readdirSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
+import path from 'node:path';
 import { loadEnvFile } from 'node:process';
 
 import { configuration } from '../src/config/index.js';
@@ -17,11 +17,11 @@ if (!process.env['DB_HOST']) {
 }
 
 function pascalToHyphen(fileName: string): string {
-  return fileName.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
+  return fileName.replaceAll(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 }
 
 // https://mikro-orm.io/docs/entity-generator
-(async () => {
+try {
   const { mikro: config } = await configuration();
 
   const dbName = await select({
@@ -58,7 +58,7 @@ function pascalToHyphen(fileName: string): string {
   });
   await orm.close(true);
 
-  const entityDir = join(import.meta.dirname, '../src/entities', dbName);
+  const entityDir = path.join(import.meta.dirname, '../src/entities', dbName);
   const files = [];
 
   for (const file of readdirSync(entityDir)) {
@@ -71,9 +71,9 @@ function pascalToHyphen(fileName: string): string {
   // export entities db tables
   // AS-IS import { Tablename } from './entities/dbname/tablename';
   // TO-BE import { Tablename } from './entities/dbname';
-  writeFileSync(join(entityDir, 'index.ts'), files.join('\n'));
+  writeFileSync(path.join(entityDir, 'index.ts'), files.join('\n'));
 
   console.log(`> '${dbName}' database entities has been created: ${entityDir}`);
-})().catch((error: unknown) => {
+} catch (error) {
   console.error(error);
-});
+}

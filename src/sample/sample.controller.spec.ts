@@ -34,7 +34,7 @@ beforeAll(async () => {
   }).compile();
 
   const em: DeepMockProxy<EntityManager> = app.get(EntityManager);
-  em.flush.mockResolvedValueOnce(undefined);
+  em.flush.mockResolvedValueOnce();
 
   repository = app.get(getRepositoryToken(Memo));
   sample = app.get(SampleController);

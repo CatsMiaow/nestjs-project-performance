@@ -5,6 +5,7 @@ import { defineConfig } from 'eslint/config';
 import importPlugin from 'eslint-plugin-import';
 import prettierRecommended from 'eslint-plugin-prettier/recommended';
 import sonarjs from 'eslint-plugin-sonarjs';
+import unicorn from 'eslint-plugin-unicorn';
 import neostandard from 'neostandard';
 import { configs, plugin } from 'typescript-eslint';
 
@@ -16,6 +17,7 @@ export default defineConfig(
   configs.stylisticTypeChecked,
   ...neostandard({ env: ['node'], ts: true, semi: true, noJsx: true }),
   prettierRecommended,
+  unicorn.configs.unopinionated,
   sonarjs.configs.recommended,
   vitest.configs.recommended,
   {
@@ -78,6 +80,10 @@ export default defineConfig(
       //#region sonarjs
       // https://community.sonarsource.com/t/eslint-plugin-sonarjs-performance-issues-on-large-codebase/138392
       'sonarjs/no-commented-code': 'off',
+      //#endregion
+
+      //#region unicorn
+      'unicorn/no-abusive-eslint-disable': 'off',
       //#endregion
     },
   },

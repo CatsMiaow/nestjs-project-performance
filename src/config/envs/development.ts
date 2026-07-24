@@ -12,7 +12,7 @@ export const config = {
     pool: {
       min: 0,
       max: 5,
-      idleTimeoutMillis: 10000,
+      idleTimeoutMillis: 10_000,
     },
   } satisfies MikroOrmModuleOptions<MySqlDriver>,
 };

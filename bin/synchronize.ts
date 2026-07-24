@@ -15,7 +15,7 @@ if (!process.env['DB_HOST']) {
 }
 
 // https://mikro-orm.io/docs/schema-generator
-(async () => {
+try {
   const { mikro: config } = await configuration();
 
   const dbName = await select({
@@ -49,6 +49,6 @@ if (!process.env['DB_HOST']) {
   await generator.create();
 
   await orm.close(true);
-})().catch((error: unknown) => {
+} catch (error) {
   console.error(error);
-});
+}

@@ -36,11 +36,9 @@ async function bootstrap(): Promise<string> {
   return app.getUrl();
 }
 
-void (async () => {
-  try {
-    const url = await bootstrap();
-    Logger.log(url, 'Bootstrap');
-  } catch (error) {
-    Logger.error(error, 'Bootstrap');
-  }
-})();
+try {
+  const url = await bootstrap();
+  Logger.log(url, 'Bootstrap');
+} catch (error) {
+  Logger.error(error, 'Bootstrap');
+}
