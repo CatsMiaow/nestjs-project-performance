@@ -23,17 +23,17 @@ In this example, the changed modules are as follows.
 
 ```sh
 # 1. node_modules
-npm ci
+pnpm install
 # 2. When synchronize database from existing entities
-npm run entity:sync
+pnpm entity:sync
 # 2-1. When import entities from an existing database
-npm run entity:load
+pnpm entity:load
 ```
 
 ## Development
 
 ```sh
-npm run start:dev
+pnpm start:dev
 ```
 
 Run [http://localhost:3000](http://localhost:3000)
@@ -41,15 +41,15 @@ Run [http://localhost:3000](http://localhost:3000)
 ## Test
 
 ```sh
-npm test # exclude e2e
-npm run test:e2e # only e2e
+pnpm test # exclude e2e
+pnpm test:e2e # only e2e
 ```
 
 ## Production
 
 ```sh
 # define NODE_ENV and PORT
-npm run build
+pnpm build
 # NODE_ENV=production PORT=8000 node dist/app.js
 node dist/app.js
 ```
@@ -59,9 +59,9 @@ node dist/app.js
 ```sh
 # https://docs.nestjs.com/openapi/cli-plugin#swc-builder
 # Update the metadata before running the swagger server.
-npm run esm bin/generate-metadata.ts
+pnpm esm bin/generate-metadata.ts
 # API, Swagger - src/swagger.ts
-npm run doc:api #> http://localhost:8000/api
+pnpm doc:api #> http://localhost:8000/api
 ```
 
 ## Implements

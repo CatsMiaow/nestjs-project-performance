@@ -6,8 +6,10 @@
   "private": true,
   "type": "module",
   "engines": {
-    "node": ">=24"
+    "node": ">=24",
+    "pnpm": "^12"
   },
+  "packageManager": "pnpm@12.16.0",
   "scripts": {
     "lint": "eslint",
     "lint:fix": "eslint --fix",
@@ -19,8 +21,8 @@
     "test": "vitest run --exclude **/e2e/**/*.ts",
     "test:e2e": "vitest run --config ./test/vitest.e2e.ts",
     "esm": "node --import @swc-node/register/esm-register",
-    "entity:load": "npm run esm ./bin/entities.ts",
-    "entity:sync": "npm run esm ./bin/synchronize.ts",
+    "entity:load": "pnpm esm ./bin/entities.ts",
+    "entity:sync": "pnpm esm ./bin/synchronize.ts",
     "doc:api": "nest build && node dist/swagger"
   },
   "dependencies": {
@@ -45,6 +47,8 @@
     "@nestjs/terminus": "^11.1.1",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.14.4",
+    "fastify": "^5.7.4",
+    "mysql2": "^3.19.1",
     "nestjs-pino": "^4.6.1",
     "passport": "^0.7.0",
     "passport-jwt": "^4.0.1",

@@ -1,0 +1,12 @@
+# https://pnpm.io/supply-chain-security
+engineStrict: true
+
+minimumReleaseAge: 1440
+trustPolicy: no-downgrade
+trustPolicyIgnoreAfter: 43200 # 30 days
+
+allowBuilds:
+  '@nestjs/core': false
+  '@scarf/scarf': false
+  '@swc/core': false
+  unrs-resolver: false
