@@ -16,7 +16,8 @@ export const loggerOptions = <Params>{
       ...(process.env.NODE_ENV === 'production'
         ? {}
         : {
-            level: 'debug',
+            // Vitest sets NODE_ENV=test; keep test output quiet
+            level: process.env.NODE_ENV === 'test' ? 'silent' : 'debug',
             transport: {
               target: 'pino-pretty',
               options: { sync: true, singleLine: true },
