@@ -13,6 +13,7 @@ export const loggerOptions = <Params>{
   pinoHttp: [
     {
       quietReqLogger: true,
+      redact: ['req.headers.authorization', 'req.headers.cookie', 'res.headers["set-cookie"]'],
       ...(process.env.NODE_ENV === 'production'
         ? {}
         : {
