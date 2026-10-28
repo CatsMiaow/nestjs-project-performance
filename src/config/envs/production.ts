@@ -1,6 +1,8 @@
-import type { MySqlDriver } from '@mikro-orm/mysql';
+import type { MySqlConnection, MySqlDriver } from '@mikro-orm/mysql';
 import type { MikroOrmModuleOptions } from '@mikro-orm/nestjs';
-import { type PoolOptions } from 'mysql2';
+
+// mysql2 pool options
+type PoolOptions = ReturnType<MySqlConnection['mapOptions']>;
 
 export const config = {
   env: 'production',

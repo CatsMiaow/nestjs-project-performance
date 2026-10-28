@@ -1,7 +1,7 @@
 import { EntityManager, type EntityRepository } from '@mikro-orm/core';
 import { getRepositoryToken } from '@mikro-orm/nestjs';
 import { Test, TestingModule } from '@nestjs/testing';
-import { afterAll, beforeAll, expect, test } from 'vitest';
+import { afterAll, beforeAll, expect, test, type MockedObject } from 'vitest';
 import { type DeepMockProxy, mockDeep } from 'vitest-mock-extended';
 
 import { SampleController } from './sample.controller.js';
@@ -9,7 +9,7 @@ import { SampleService } from './sample.service.js';
 import { Category, Memo } from '../entities/test/index.js';
 
 let app: TestingModule | undefined;
-let repository: DeepMockProxy<EntityRepository<Memo>>;
+let repository: MockedObject<EntityRepository<Memo>>;
 let sample: SampleController;
 let mockValue: Memo;
 
@@ -48,7 +48,7 @@ test('create memo', async () => {
     updatedAt: new Date(),
     createdAt: new Date(),
   });
-  repository.create.mockResolvedValueOnce(mockValue);
+  repository.create.mockReturnValueOnce(mockValue);
 
   const result = await sample.create({ title: 'FooBar', content: 'Hello World' });
   expect(result).toHaveProperty('id', 1);
