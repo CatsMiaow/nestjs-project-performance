@@ -33,7 +33,7 @@ try {
     ],
   });
 
-  const orm = await MikroORM.init({
+  await using orm = await MikroORM.init({
     discovery: {
       warnWhenNoEntities: false,
     },
@@ -56,7 +56,6 @@ try {
       return `${pascalToHyphen(className)}.entity`;
     },
   });
-  await orm.close(true);
 
   const entityDir = path.join(import.meta.dirname, '../src/entities', dbName);
   const files = [];
