@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { FastifyAdapter, type NestFastifyApplication } from '@nestjs/platform-fastify';
 import { Test } from '@nestjs/testing';
 import supertest from 'supertest';
@@ -23,39 +22,39 @@ beforeAll(async () => {
 });
 
 test('POST: /sample/memo', async () => {
-  const { status, body } = await request.post('/sample/memo').send({
+  const res = await request.post('/sample/memo').send({
     title: 'FooBar',
     content: 'Hello World',
     categories: ['foo', 'bar'],
   });
 
-  expect([200, 201]).toContain(status);
-  expect(body).toHaveProperty('id');
+  expect([200, 201]).toContain(res.status);
+  expect(res.body).toHaveProperty('id');
 
-  idx = body.id;
+  idx = Number(res.body.id);
 });
 
 test('GET: /sample/memo/:idx', async () => {
-  const { body } = await request.get(`/sample/memo/${idx}`).expect(200);
+  const res = await request.get(`/sample/memo/${idx}`).expect(200);
 
-  expect(body).toHaveProperty('title', 'FooBar');
-  expect(Array.isArray(body.categories)).toBe(true);
-  expect(body.categories).toHaveLength(2);
+  expect(res.body).toHaveProperty('title', 'FooBar');
+  expect(Array.isArray(res.body.categories)).toBe(true);
+  expect(res.body.categories).toHaveLength(2);
 });
 
 test('PUT: /sample/memo/:idx', async () => {
-  const { body } = await request
+  const res = await request
     .put(`/sample/memo/${idx}`)
     .send({ title: 'Blahblahblah', categories: ['blah'] })
     .expect(200);
 
-  expect(body).toHaveProperty('title', 'Blahblahblah');
+  expect(res.body).toHaveProperty('title', 'Blahblahblah');
 });
 
 test('DELETE: /sample/memo/:idx', async () => {
-  const { body } = await request.delete(`/sample/memo/${idx}`).expect(200);
+  const res = await request.delete(`/sample/memo/${idx}`).expect(200);
 
-  expect(body).toHaveProperty('result', 1);
+  expect(res.body).toHaveProperty('result', 1);
 });
 
 afterAll(async () => {

@@ -41,13 +41,13 @@ beforeAll(async () => {
 });
 
 test('create memo', async () => {
-  mockValue = <Memo>{
+  mockValue = Object.assign(new Memo(), {
     id: 1,
     title: 'FooBar',
     content: 'Hello World',
     updatedAt: new Date(),
     createdAt: new Date(),
-  };
+  });
   repository.create.mockResolvedValueOnce(mockValue);
 
   const result = await sample.create({ title: 'FooBar', content: 'Hello World' });

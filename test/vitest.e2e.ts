@@ -1,4 +1,4 @@
-/* eslint-disable import/no-default-export */
+/* oxlint-disable import/no-default-export */
 import { defineConfig, mergeConfig } from 'vitest/config';
 
 import config from '../vitest.config.js';

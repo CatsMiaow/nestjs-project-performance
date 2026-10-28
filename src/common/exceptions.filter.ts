@@ -4,6 +4,7 @@ import { BaseExceptionFilter } from '@nestjs/core';
 @Catch()
 export class ExceptionsFilter extends BaseExceptionFilter {
   public override catch(exception: unknown, host: ArgumentsHost): void {
+    // oxlint-disable-next-line promise/valid-params -- BaseExceptionFilter#catch, not Promise#catch
     super.catch(exception, host);
 
     const status = this.getHttpStatus(exception);

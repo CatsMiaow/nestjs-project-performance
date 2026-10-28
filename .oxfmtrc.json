@@ -1,0 +1,17 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "printWidth": 140,
+  "singleQuote": true,
+  "sortPackageJson": false,
+  "sortImports": {
+    "groups": [
+      ["builtin", "external", "internal", "subpath"],
+      ["sibling", "index"],
+      { "newlinesBetween": false },
+      "parent",
+      { "newlinesBetween": false },
+      "unknown"
+    ]
+  },
+  "ignorePatterns": ["src/metadata.ts"]
+}

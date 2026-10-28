@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* oxlint-disable no-console */
 import { select } from '@inquirer/prompts';
 import { MikroORM } from '@mikro-orm/core';
 import { ReflectMetadataProvider } from '@mikro-orm/decorators/legacy';
