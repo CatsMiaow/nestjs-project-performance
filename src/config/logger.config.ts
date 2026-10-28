@@ -5,7 +5,10 @@ import { multistream } from 'pino';
 
 const passUrl = new Set(['/health']);
 
-export const genReqId = (req: RawRequestDefaultExpression<RawServerBase>) => <string>req.headers['X-Request-Id'] || randomUUID();
+export const genReqId = (req: RawRequestDefaultExpression<RawServerBase>) => {
+  const id = req.headers['x-request-id'];
+  return typeof id === 'string' && id !== '' ? id : randomUUID();
+};
 export const loggerOptions = <Params>{
   pinoHttp: [
     {
