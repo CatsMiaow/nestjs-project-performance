@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* oxlint-disable no-console */
 import { select } from '@inquirer/prompts';
 import { MikroORM } from '@mikro-orm/core';
 import { ReflectMetadataProvider } from '@mikro-orm/decorators/legacy';
@@ -27,7 +27,7 @@ try {
     ],
   });
 
-  const orm = await MikroORM.init({
+  await using orm = await MikroORM.init({
     driver: config.driver,
     metadataProvider: ReflectMetadataProvider,
     entities: [`${import.meta.dirname}/../src/entities/${dbName}`],
@@ -47,8 +47,6 @@ try {
 
   // DIY
   await generator.create();
-
-  await orm.close(true);
 } catch (error) {
   console.error(error);
 }

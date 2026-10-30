@@ -1,4 +1,4 @@
-import type { Config, Default, Objectype, Production } from './config.interface.js';
+import type { Config, Objectype, Production } from './config.interface.js';
 
 const util = {
   isObject<T>(value: T): value is T & Objectype {
@@ -18,7 +18,8 @@ const util = {
 };
 
 export const configuration = async (): Promise<Config> => {
-  const { config } = <{ config: Default }>await import(`${import.meta.dirname}/envs/default.js`);
+  const { config } = await import('./envs/default.js');
+  // oxlint-disable-next-line typescript/no-unsafe-type-assertion
   const { config: environment } = <{ config: Production }>(
     await import(`${import.meta.dirname}/envs/${process.env.NODE_ENV || 'development'}.js`)
   );

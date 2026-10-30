@@ -5,15 +5,20 @@ import { multistream } from 'pino';
 
 const passUrl = new Set(['/health']);
 
-export const genReqId = (req: RawRequestDefaultExpression<RawServerBase>) => <string>req.headers['X-Request-Id'] || randomUUID();
+export const genReqId = (req: RawRequestDefaultExpression<RawServerBase>) => {
+  const id = req.headers['x-request-id'];
+  return typeof id === 'string' && id !== '' ? id : randomUUID();
+};
 export const loggerOptions = <Params>{
   pinoHttp: [
     {
       quietReqLogger: true,
+      redact: ['req.headers.authorization', 'req.headers.cookie', 'res.headers["set-cookie"]'],
       ...(process.env.NODE_ENV === 'production'
         ? {}
         : {
-            level: 'debug',
+            // Vitest sets NODE_ENV=test; keep test output quiet
+            level: process.env.NODE_ENV === 'test' ? 'silent' : 'debug',
             transport: {
               target: 'pino-pretty',
               options: { sync: true, singleLine: true },

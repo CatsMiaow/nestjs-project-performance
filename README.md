@@ -7,9 +7,11 @@ In this example, the changed modules are as follows.
 
 - [Fastify](https://docs.nestjs.com/techniques/performance) instead of `Express`
 - [MikroORM](https://docs.nestjs.com/recipes/mikroorm) with [@mikro-orm/nestjs](https://mikro-orm.io/docs/usage-with-nestjs) instead of `TypeORM`
-- [SWC](https://docs.nestjs.com/recipes/swc#swc) instead of `TypeScript compiler`
-- [Vitest](https://docs.nestjs.com/recipes/swc#vitest) with [vitest-mock-extended](https://www.npmjs.com/package/vitest-mock-extended) instead of `Jest`
+- [SWC](https://docs.nestjs.com/recipes/swc) instead of `TypeScript compiler`
 - [ESM](https://nodejs.org/api/esm.html) instead of `CommonJS`
+- [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) instead of `ESLint`
+- [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) instead of `Prettier`
+- [pnpm](https://pnpm.io) instead of `npm`
 
 ## Configuration
 
@@ -23,17 +25,17 @@ In this example, the changed modules are as follows.
 
 ```sh
 # 1. node_modules
-npm ci
+pnpm install
 # 2. When synchronize database from existing entities
-npm run entity:sync
+pnpm entity:sync
 # 2-1. When import entities from an existing database
-npm run entity:load
+pnpm entity:load
 ```
 
 ## Development
 
 ```sh
-npm run start:dev
+pnpm start:dev
 ```
 
 Run [http://localhost:3000](http://localhost:3000)
@@ -41,15 +43,15 @@ Run [http://localhost:3000](http://localhost:3000)
 ## Test
 
 ```sh
-npm test # exclude e2e
-npm run test:e2e # only e2e
+pnpm test # exclude e2e
+pnpm test:e2e # only e2e
 ```
 
 ## Production
 
 ```sh
 # define NODE_ENV and PORT
-npm run build
+pnpm build
 # NODE_ENV=production PORT=8000 node dist/app.js
 node dist/app.js
 ```
@@ -59,9 +61,9 @@ node dist/app.js
 ```sh
 # https://docs.nestjs.com/openapi/cli-plugin#swc-builder
 # Update the metadata before running the swagger server.
-npm run esm bin/generate-metadata.ts
+pnpm esm bin/generate-metadata.ts
 # API, Swagger - src/swagger.ts
-npm run doc:api #> http://localhost:8000/api
+pnpm doc:api #> http://localhost:8000/api
 ```
 
 ## Implements
@@ -82,4 +84,4 @@ npm run doc:api #> http://localhost:8000/api
 - [NestJS](https://docs.nestjs.com)
 - [Fastify](https://fastify.dev)
 - [MikroORM](https://mikro-orm.io)
-- [Vitest](https://vitest.dev)
+- [Oxc](https://oxc.rs)

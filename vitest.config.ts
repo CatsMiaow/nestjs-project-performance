@@ -1,4 +1,4 @@
-/* eslint-disable import/no-default-export */
+/* oxlint-disable import/no-default-export */
 import { loadEnvFile } from 'node:process';
 import { defineConfig } from 'vitest/config';
 
