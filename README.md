@@ -7,9 +7,11 @@ In this example, the changed modules are as follows.
 
 - [Fastify](https://docs.nestjs.com/techniques/performance) instead of `Express`
 - [MikroORM](https://docs.nestjs.com/recipes/mikroorm) with [@mikro-orm/nestjs](https://mikro-orm.io/docs/usage-with-nestjs) instead of `TypeORM`
-- [SWC](https://docs.nestjs.com/recipes/swc#swc) instead of `TypeScript compiler`
-- [Vitest](https://docs.nestjs.com/recipes/swc#vitest) with [vitest-mock-extended](https://www.npmjs.com/package/vitest-mock-extended) instead of `Jest`
+- [SWC](https://docs.nestjs.com/recipes/swc) instead of `TypeScript compiler`
 - [ESM](https://nodejs.org/api/esm.html) instead of `CommonJS`
+- [Oxlint](https://oxc.rs/docs/guide/usage/linter.html) instead of `ESLint`
+- [Oxfmt](https://oxc.rs/docs/guide/usage/formatter.html) instead of `Prettier`
+- [pnpm](https://pnpm.io) instead of `npm`
 
 ## Configuration
 
@@ -82,4 +84,4 @@ pnpm doc:api #> http://localhost:8000/api
 - [NestJS](https://docs.nestjs.com)
 - [Fastify](https://fastify.dev)
 - [MikroORM](https://mikro-orm.io)
-- [Vitest](https://vitest.dev)
+- [Oxc](https://oxc.rs)
